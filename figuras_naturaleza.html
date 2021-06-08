@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+	
+
+    <script
+  src="https://code.jquery.com/jquery-2.2.4.min.js"
+  integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+  crossorigin="anonymous"></script>
+    <title>Figuras</title>
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
+</head>
+<body>
+    <style>
+        body, html{
+  font-family: arial;
+  margin: 0;
+  background: url('http://www.planwallpaper.com/static/images/website-background-pattern.jpg');
+  background-size: cover;
+  
+}
+
+img{max-width: 100%;}
+
+.quiz{
+  margin: 0 auto;
+  text-align: center;
+  max-width: 320px;
+  opacity: 0;
+  padding-right: 0.975em;
+  padding-left: 0.975em;
+}
+
+#question{
+  margin: 0.5rem auto;
+  font-weight: bold;
+}
+
+.answer-button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #39b1ff;
+  background-image: linear-gradient(to top, #2c8fff, #4cc2ff);
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  margin: 0 auto 0.5rem;
+  display: block;
+  cursor:pointer;
+}
+#answers{
+  width: 100%;
+  height: 50px;
+  margin: 0 auto; 
+   display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.pulse{
+  animation: pulse 0.7s both ease-in-out 1;
+}
+
+@keyframes pulse { 
+  0% { transform: scale3d(1,1,1); } 
+  50% { transform: scale3d(0.98,0.98,1); } 
+  100% { transform: scale3d(1,1,1);}
+} 
+
+
+#score{
+display: show;
+margin-right: 1%;	
+}
+    </style> <br><div id="score" style="font-weight: 700; text-align: right;"><p id="parrafo1">Puntuación: </p></div>
+	  <h3 style="text-align: center; font: 18px/27px 'Oxygen', sans-serif;">Selecciona la figura que representa  a la imagen</h3>
+     <a id="next_game" style="font-size: 20px;font-weight: bold;color: blue; text-decoration: none" href="como_te_mueves.html">Siguiente juego <i class="fas fa-arrow-circle-right"></i></a><br><br>
+     <a id="menu" style="font-size: 20px;font-weight: bold;color: blue; text-decoration: none" href="index.html">Volver al men&uacute; principal <i class="fas fa-home"></i></a><br><br>
+    <div class="quiz">
+        <div id="image"><img id="qImg" src=""></div>
+        <div id="question"></div>
+        <div id="answers"></div>
+      </div>
+ 
+
+      <script>
+          var questionNumber = 0;
+var totalScore = 0;
+var question;
+var totalAnswers;
+var correctAnswer;
+var quizLength;
+var quizItems = [
+  {
+    "qImg": "sol.png",
+    "question": "¿Qué figura resalta en el sol?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "0"
+  },
+  {
+    "qImg":"figuras/tomate.png",
+    "question": "¿Qué figura resalta en el tomate?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "0"
+  },
+  {
+    "qImg":"figuras/montañas.png",
+    "question": "¿Qué figura resalta en las montañas?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "2"
+  } ,
+  {
+    "qImg":"figuras/pino.png",
+    "question": "¿Qué figura resalta en el pino?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "2"
+  } ,
+  {
+    "qImg":"figuras/camion.png",
+    "question": "¿Qué figura resalta en el camión?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "1"
+  } ,
+   {
+    "qImg":"figuras/manzana.png",
+    "question": "¿Qué figura resalta la manzana?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "0"
+  }  ,
+  {
+    "qImg":"figuras/casa.png",
+    "question": "¿Cuál es la figura que resalta en la casa?",
+    "answers": ["Circulo", "Rectángulo", "Triángulo","Cuadrado"],
+    "correct": "3"
+  } 
+];
+
+$(document).ready(function(){
+  nextQuestion();
+});
+
+function nextQuestion(){
+  quizLength = quizItems.length;
+  if(questionNumber  == quizLength){ //END OF QUIZ; FOLLOW UP IN HERE
+    $('.quiz').fadeOut(function(){
+      setTimeout(function(){
+        $('#score').html("Tu puntaje obtenido: " + totalScore).fadeIn(); //Score is optional
+        $('#next_game').fadeIn();
+        $('#menu').fadeIn();
+      },500);
+    });
+  } else {
+    $('#question, #answers').html('');
+    $('#qImg').attr('src','');
+    question = quizItems[questionNumber]['question'];
+    qImg = quizItems[questionNumber]['qImg'];
+    totalAnswers = quizItems[questionNumber].answers.length;
+    correctAnswer = quizItems[questionNumber]['correct'];
+    if (qImg !== "") {
+      $('#qImg').attr('src',qImg).show();
+    } else {
+      $('#qImg').hide();
+    }
+    $('#question').text(question);
+    for(i=0;i<totalAnswers;i++){
+      $('#answers').append('<div id="'+ i +'" class="answer-button">'+quizItems[questionNumber].answers[i]+'</div>');
+    }
+    $('.quiz').fadeTo(500,1);
+    $(".answer-button").on('click',answerQuestion);
+    pulseClick(0);
+  }
+}
+
+function answerQuestion(){
+  $(".answer-button").off('click',answerQuestion);
+  var a = this.id;
+  console.log("Your answer: "+ a +"; The correct answer: " + correctAnswer);
+  checkScore(a); // Checking the score on your click.
+  if(a === correctAnswer)
+  questionNumber++;
+  $('.quiz').fadeTo(500,0, function(){
+    nextQuestion();
+  });
+}
+
+function checkScore(a){ // Checking your score here
+  console.log("Your answer to check: "+ a);
+  if(a === correctAnswer){
+    console.log("Right answer!");
+    totalScore +=10;
+    document.getElementById('parrafo1').innerHTML= 'Puntuación: '+totalScore;
+
+    console.log("The score: "+ totalScore);
+  } else{
+       alert("Respuesta incorrecta!")
+    
+    console.log("The score: "+ totalScore);
+  }
+}
+
+function pulseClick(i){
+  var btnCount = $('#answers').find('.answer-button').length-1;
+  console.log(btnCount);
+  $('#answers').find('.answer-button').eq(i).addClass('pulse').one('webkitAnimationEnd oanimationend msAnimationEnd animationend',function(e) {
+    $(this).removeClass('pulse');
+    if(i === btnCount){
+      i=0;
+    } else {
+      i++;
+    }
+    pulseClick(i);
+  });
+}
+      </script>
+</body>
+</html>

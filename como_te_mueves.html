@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script
+    src="https://code.jquery.com/jquery-2.2.4.min.js"
+    integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="
+    crossorigin="anonymous"></script>
+    <title>Movimiento</title>
+	<script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
+</head>
+<body>
+
+    <style>
+        #box-one,
+#box-two
+{
+  width: 200px;
+  height: 200px;
+
+  background-image: url("mover.jpg");
+  background-size: cover;
+  display: flex;
+ justify-content: center;
+ align-items: center;
+
+
+}
+table{
+ 
+ display: flex;
+ justify-content: center;
+ align-items: center;
+}
+.container{
+    width: 100px;
+  height: 100px;
+  align-self: center;
+  margin-left: 45%;
+}
+
+#box-two
+{
+  transition: transform 0.6s ease;
+}
+
+#button-three
+{
+  position: relative;
+  left: 100px;
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #14af0f;
+
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  margin: 0 auto 0.5rem;
+  display: block;
+  cursor:pointer;
+}
+#button-4,#button-5,#button-6,#button-two{
+    -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #39b1ff;
+  background-image: linear-gradient(to top, #2c8fff, #4cc2ff);
+  padding: 10px;
+  font-size: 16px;
+  color: white;
+  font-weight: bold;
+  outline: none;
+  margin: 0 auto 0.5rem;
+  display: block;
+  cursor:pointer;
+}
+fa-arrow-circle-right{
+	font-size: 100px;
+}
+
+    </style>
+
+
+  <h3 style="text-align: center; font: 18px/27px 'Oxygen', sans-serif;">Haz click en los botones para mostrar como te mueves</h3>
+  <a id="next_game" style="font-size: 20px;font-weight: bold;color: blue; text-decoration: none" href="dias_semana.html">Siguiente juego <i class="fas fa-arrow-circle-right"></i></a><br><br>
+  <a id="menu" style="font-size: 20px;font-weight: bold;color: blue; text-decoration: none" href="index.html">Volver al men&uacute; principal <i class="fas fa-home"></i></a><br><br>
+  
+<div class="container">
+ 
+    <div id="box-two"></div><br><br><br>
+    
+<table style="width:100%; margin-top: 50%">
+ 
+  <tr>
+    <td></td>
+    <td><button id="button-6">Arriba <i class="fas fa-arrow-circle-up"></i></button></td>
+    <td></td>
+  </tr>
+  <tr>
+    <td><button id="button-4">Izquierda <i class="fas fa-arrow-circle-left"></i></button></td>
+    <td></td>
+    <td><button id="button-two">Derecha<i class="fas fa-arrow-circle-right"></i></button></td>
+  </tr>
+  <tr>
+    <td></td>
+    <td><button id="button-5">Abajo <i class="fas fa-arrow-circle-down"></i></button></td>
+    <td><button id="button-three">Reiniciar <i class="fas fa-redo"></i></button></td>
+  </tr>
+</table>
+</div>
+
+
+
+
+<script>
+    $(document).ready(function(){
+  $('#button-one').click(function(){
+    $('#box-one').css("transform","translate(250px,0)");
+  });
+});
+
+$(document).ready(function(){
+  $('#button-two').click(function(){
+    $('#box-two').css("transform","translate(250px,0)");
+  });
+});
+
+$(document).ready(function(){
+  $('#button-three').click(function(){
+    $('#box-one, #box-two').css("transform","translate(0px,0)");
+  });
+});
+$(document).ready(function(){
+  $('#button-4').click(function(){
+    $('#box-one, #box-two').css("transform","translate(-250px,0)");
+  });
+});
+$(document).ready(function(){
+  $('#button-5').click(function(){
+    $('#box-one, #box-two').css("transform","translate(0px,80px)");
+  });
+});
+$(document).ready(function(){
+  $('#button-6').click(function(){
+    $('#box-one, #box-two').css("transform","translate(0px,-80px)");
+  });
+});
+</script>
+    
+</body>
+</html>
